@@ -1,0 +1,10 @@
+MyBlog.com
+
+Hey There {{user.username}}
+Our Team has noticed that you have just signed up for a MyBlog Account.We would like to welcome you and wish you a
+    great time on our application
+
+Remember Your Opinion matters here at MyBlog.com
+
+Thanks,
+MyBlog.com
