@@ -1,6 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from ..models import User,PhotoProfile
 from . import main
+from ..request import get_quotes
 from .. import db,photos
 from .forms import BlogForm
 from flask_login import login_required, current_user
@@ -10,7 +11,7 @@ def index():
     '''
     View root page that returns the index page and its data
     '''
-    
+    quotes = get_quotes()
     
     title = 'MyBlog.com'
 
