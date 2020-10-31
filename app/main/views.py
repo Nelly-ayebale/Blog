@@ -11,11 +11,11 @@ def index():
     '''
     View root page that returns the index page and its data
     '''
-    quotes = get_quotes()
+    quote = get_quotes()
     
     title = 'MyBlog.com'
 
-    return render_template('index.html', title=title)
+    return render_template('index.html', title=title, quote = quote)
 
 
 @main.route('/user/<uname>')

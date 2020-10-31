@@ -4,9 +4,10 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h2 class="text-center">WELCOME TO MyBlog.com.</h2>
-        <h2 class="text-center">{{quote.quote}}</h2>
-        <h2 class="text-center">{{quote.author}}</h2>
+        <h2 class="text-center" style="font-weight: bolder; text-decoration: underline;">WELCOME TO MyBlog.com.</h2>
+        <h2 class="text-center mt-2" style="font-weight: bold; text-decoration: underline;">Inspirational Quote:</h2>
+        <h3 class="text-center">{{quote.quote}}</h3>
+        <h3 class="text-center text-muted">--{{quote.author}}--</h3>
     </div>
 </div>
 {% endblock %}

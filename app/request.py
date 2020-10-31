@@ -20,19 +20,9 @@ def get_quotes():
         quote_results = None
 
         if get_quotes_response:
-            quote_results_list = get_quotes_response
-            quote_results = process_results(quote_results_list)
+            quote = get_quotes_response.get('quote')
+            author = get_quotes_response.get('author')
+
+            quote_results = Quote(quote,author)
     return quote_results
 
-def process_results(quote_list):
-    '''
-    Function that processes the quotes' results and transforms them to a list of objects
-    '''
-    quote_results = []
-    for quote_item in quote_list:
-        quote = quote_item.get('quote')
-        author = quote_item.get('author')
-
-        quote_object = Quote(quote,author)
-        quote_results.append(quote_object)
-    return quote_results
