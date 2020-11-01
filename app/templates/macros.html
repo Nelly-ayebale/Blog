@@ -10,6 +10,7 @@
                 <h4>POSTED BY:{{blog.user.username}}</h4>
                 <a href="/comment/{{blog.id}}" class="btn btn-primary">Comment</a>
                 <a href="/view_comments/{{blog.id}}" class="btn btn-primary">View Comments</a>
+                <a href="/delete_blog/{{blog.id}}" class="btn btn-danger">Delete Blog</a>
                 {% endfor %}
                 {%else%}
                 <h4 class="text-center">NO BLOGS</h4>

@@ -1,4 +1,4 @@
-from flask import render_template,request,redirect,url_for,abort
+from flask import render_template,request,redirect,url_for,abort,flash
 from ..models import User,PhotoProfile,Blog,Comment
 from . import main
 from ..request import get_quotes
@@ -38,6 +38,18 @@ def blogs():
     title = 'All Blogs'
     return render_template('all_blogs.html', title = title,blogs=blogs)
 
+@main.route('/delete_blog/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_blog(id):
+    blog = Blog.query.get(id)
+    if blog.user.id != current_user.id:
+        abort(403)
+    db.session.delete(blog)
+    db.session.commit()
+ 
+    return redirect(url_for('main.blogs'))
+
+
 @main.route('/view_comments/<id>')
 @login_required
 def view_comments(id):
@@ -58,6 +70,17 @@ def comment(blog_id):
         new_comment.save_comment()
         return redirect(url_for('main.blogs'))
     return render_template('new_comment.html', form=form, blog_id=blog_id)
+
+@main.route('/delete_comment/<int:comment_id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(comment_id):
+    comment =Comment.query.get(comment_id)
+    if comment.user.id != current_user.id:
+        abort(403)
+    db.session.delete(comment)
+    db.session.commit()
+   
+    return redirect (url_for('main.blogs'))
 
 @main.route('/user/<uname>')
 def profile(uname):
