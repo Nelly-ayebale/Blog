@@ -12,7 +12,7 @@ def index():
     View root page that returns the index page and its data
     '''
     quote = get_quotes()
-    blogs = Blog.query.all()
+    
     title = 'MyBlog.com'
 
     return render_template('index.html', title=title, quote = quote)
@@ -28,8 +28,15 @@ def new_blog():
         new_blog = Blog(title=title, blog=blog, user_id=current_user._get_current_object().id)
         new_blog.save_blogs()
 
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.blogs'))
     return render_template('new_blog.html', form=form)
+
+@main.route('/blogs', methods=['GET','POST'])
+@login_required
+def blogs():
+    blogs = Blog.query.all()
+    title = 'All Blogs'
+    return render_template('all_blogs.html', title = title)
 
 @main.route('/user/<uname>')
 def profile(uname):
