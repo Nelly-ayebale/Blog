@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            {% for comment in comments %}
+            <ul>
+                <h4>{{comment.comment}}</h4>
+                <li style="font-weight: bold; font-size: 20px;">Posted By:{{comment.user.username}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

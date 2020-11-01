@@ -38,6 +38,13 @@ def blogs():
     title = 'All Blogs'
     return render_template('all_blogs.html', title = title,blogs=blogs)
 
+@main.route('/view_comments/<id>')
+@login_required
+def view_comments(id):
+    comment = Comment.get_comments(id)
+    title = 'View Comments'
+    return render_template('comment.html', comment=comment, title=title)
+
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
