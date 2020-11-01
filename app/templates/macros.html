@@ -1,0 +1,14 @@
+{% macro display(blogs) %}
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body col-md-8">
+                {% if blogs %}
+                {% for blog in blogs %}
+                <h2 class="card-title">SUBJECT:{{blog.title}}</h2>
+                <h3 class="card-subtitle mb-2">{{blog.blog}}</h3>
+                <h4>POSTED BY:{{blog.user.username}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
