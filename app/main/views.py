@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for,abort
-from ..models import User,PhotoProfile
+from ..models import User,PhotoProfile,Blog,Comment
 from . import main
 from ..request import get_quotes
 from .. import db,photos
-from .forms import BlogForm
+from .forms import BlogForm,CommentForm,UpdateProfile
 from flask_login import login_required, current_user
 
 @main.route('/')
@@ -12,11 +12,24 @@ def index():
     View root page that returns the index page and its data
     '''
     quote = get_quotes()
-    
+    blogs = Blog.query.all()
     title = 'MyBlog.com'
 
     return render_template('index.html', title=title, quote = quote)
 
+@main.route('/new_blog', methods=['GET', 'POST'])
+@login_required
+def new_blog():
+    form = BlogForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        blog = form.blog.data
+        user_id = current_user
+        new_blog = Blog(title=title, blog=blog, user_id=current_user._get_current_object().id)
+        new_blog.save_blogs()
+
+        return redirect(url_for('main.index'))
+    return render_template('new_blog.html', form=form)
 
 @main.route('/user/<uname>')
 def profile(uname):
