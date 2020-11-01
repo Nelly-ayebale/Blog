@@ -36,7 +36,7 @@ def new_blog():
 def blogs():
     blogs = Blog.query.all()
     title = 'All Blogs'
-    return render_template('all_blogs.html', title = title)
+    return render_template('all_blogs.html', title = title,blogs=blogs)
 
 @main.route('/user/<uname>')
 def profile(uname):
