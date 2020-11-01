@@ -38,6 +38,26 @@ def blogs():
     title = 'All Blogs'
     return render_template('all_blogs.html', title = title,blogs=blogs)
 
+@main.route('/update_blog/<int:id>',methods = ['GET','POST'])
+@login_required
+def update_blog(id):
+    blog = Blog.query.get(id)
+    if blog.user.id != current_user.id:
+        abort(403)
+
+    form = BlogForm()
+
+    if form.validate_on_submit():
+        blog.title = form.title.data
+        blog.blog = form.blog.data
+        db.session.add(blog)
+        db.session.commit()
+
+        return redirect(url_for('main.blogs'))
+
+    return render_template('update_blog.html',form =form)
+
+
 @main.route('/delete_blog/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_blog(id):
