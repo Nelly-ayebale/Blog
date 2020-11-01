@@ -42,11 +42,11 @@ class User(UserMixin,db.Model):
         return check_password_hash(self.pass_secure,password)
 
 class PhotoProfile(db.Model):
-    __tablename__='profile_photos'
-    id = db.Column(db.Integer,primary_key=True)
-    pic_path = db.Column(db.String())
-    user_id= db.Column(db.Integer,db.ForeignKey("users.id"))
+    __tablename__ = 'profile_photos'
 
+    id = db.Column(db.Integer,primary_key = True)
+    pic_path = db.Column(db.String())
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
 class Blog(db.Model):
     __tablename__= 'blogs'

@@ -5,11 +5,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-5">
-            {% for comment in comments %}
+            {% for comment in comment %}
             <ul>
-                <h4>{{comment.comment}}</h4>
-                <li style="font-weight: bold; font-size: 20px;">Posted By:{{comment.user.username}}</li>
+                <li style="font-size: 20px; font-weight: bold;">Comment :{{comment.comment}}</li>
+                <h5 style="font-weight: bold; font-size: 20px; text-decoration: underline; color: darkblue;">Posted
+                    By:{{comment.user.username}}</h5>
             </ul>
+            {% endfor %}
         </div>
     </div>
 </div>
+{% endblock %}
