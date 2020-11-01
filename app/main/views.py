@@ -45,6 +45,20 @@ def view_comments(id):
     title = 'View Comments'
     return render_template('comment.html', comment=comment, title=title)
 
+@main.route('/comment/<int:blog_id>', methods=['GET','POST'])
+@login_required
+def comment(blog_id):
+    form = CommentForm()
+    blog = Blog.query.filter_by(id=blog_id).first()
+
+    if form.validate_on_submit():
+        comment = form.comment.data
+
+        new_comment = Comment(comment=comment, user_id = current_user.id, blog_id=blog_id)
+        new_comment.save_comment()
+        return redirect(url_for('main.blogs'))
+    return render_template('new_comment.html', form=form, blog_id=blog_id)
+
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
