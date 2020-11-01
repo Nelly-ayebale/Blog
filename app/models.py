@@ -2,6 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -55,6 +56,7 @@ class Blog(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     title = db.Column(db.String(255))
     blog = db.Column(db.String(), index= True)
+    posted = db.Column(db.DateTime, default=datetime.utcnow())
     comments = db.relationship('Comment', backref='blog', lazy='dynamic')
 
     def save_blogs(self):
